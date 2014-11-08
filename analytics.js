@@ -1,9 +1,50 @@
 (function(window, undefined){
 
   window.analytics = {
-    getOS: getOS,
-    getBrowser: getBrowser
+    pageTrack: pageTracking,
+    eventTrack: eventTracking
   };
+  
+  function pageTracking() {
+    request();
+  }
+  
+  function eventTracking() {
+    
+  }
+  
+  function request() {
+    var url = getRequestUrl();
+    var img = new Image();
+    img.src = url;
+    img.style.display = "none";
+  }
+  
+  function getRequestUrl(params) {
+    var host = "http://tongji.leju.com/?site=gather&ctl=gather&act=general&host={host}&url={url}&screen_height={screen_height}&screen_width={screen_width}&brower={brower}&user_agent={user_agent}&city={city}&os={os}&level1_page={level1_page}&webtype={webtype}";
+    var paramObj = {
+      host: "",
+      url: "",
+      screen_height: "",
+      screen_width: "",
+      brower: "",
+      user_agent: "",
+      city: "",
+      os: "",
+      level1_page: "",
+      webtype: "",
+    };
+    for (var prop in params) {
+      if (paramObj.hasOwnProperty(prop)) {
+        paramObj[prop] = params[prop];
+      }
+    }
+    for (var prop in paramObj) {
+      var tobeReplaced = "{" + prop + "}";
+      host = host.replace(tobeReplaced, paramObj[prop]);
+    }
+    return host;
+  }
   
   /**
    * Get operating system name
