@@ -21,29 +21,49 @@
   }
   
   function getRequestUrl(params) {
-    var host = "http://tongji.leju.com/?site=gather&ctl=gather&act=general&host={host}&url={url}&screen_height={screen_height}&screen_width={screen_width}&brower={brower}&user_agent={user_agent}&city={city}&os={os}&level1_page={level1_page}&webtype={webtype}";
+    var host = "http://tongji.leju.com/?site=gather&ctl=gather&act=general";
+    var serializedPramString = getSerializedPrams(params);
+    return host + serializedPramString;
+  }
+  
+  function getSerializedPrams(args) {
+    var result = "";
     var paramObj = {
-      host: "",
-      url: "",
-      screen_height: "",
-      screen_width: "",
-      brower: "",
-      user_agent: "",
+      host: getHost(),
+      url: getPageUrl(),
+      screen_height: getScreenHeight(),
+      screen_width: getScreenWidth(),
+      brower: getBrowser().name,
+      user_agent: getUserAgent(),
       city: "",
-      os: "",
+      os: getOS(),
       level1_page: "",
       webtype: "",
     };
-    for (var prop in params) {
-      if (paramObj.hasOwnProperty(prop)) {
-        paramObj[prop] = params[prop];
+    var serializedObject = mergeObject(paramObj, args);
+    for (var prop in serializedObject) {
+      var thisPramStr = prop + "=" + encodeURIComponent(serializedObject[prop]);
+      result += "&" + thisPramStr;
+    }
+    
+    return result;
+  }
+  
+  function mergeObject(defaultObject, secondObject) {
+    if (window.jQuery || window.Zepto) {
+      return $.extend({}, defaultObject, secondObject);
+    } else {
+      var result = {};
+      for (var prop in defaultObject) {
+        result[prop] = defaultObject[prop];
       }
+      for (var prop in secondObject) {
+        if (result.hasOwnProperty(prop)) {
+          result[prop] = secondObject[prop];
+        }
+      }
+      return result;
     }
-    for (var prop in paramObj) {
-      var tobeReplaced = "{" + prop + "}";
-      host = host.replace(tobeReplaced, paramObj[prop]);
-    }
-    return host;
   }
   
   /**
