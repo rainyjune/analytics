@@ -5,47 +5,78 @@
     eventTrack: eventTracking
   };
   
-  function pageTracking() {
-    request();
+  // A String.trim() method for ECMAScript 3 
+  if(!String.prototype.trim) {
+    String.prototype.trim = function () {
+      return this.replace(/^\s+|\s+$/g,'');
+    };
   }
   
-  function eventTracking() {
-    
+  function pageTracking(params) {
+    var args = urlArgs();
+    var paramObj = {
+      uid: "", // TODO
+      host: getHost(),
+      url: getPageUrl(),
+      referer_url: getReferer(),
+      screen_height: getScreenHeight(),
+      screen_width: getScreenWidth(),
+      brower: getBrowser().name,
+      browser: getBrowser().name, // We hope server side script can recognise this argument.
+      user_agent: getUserAgent(),
+      city: "", // TODO
+      source: args.source || "", 
+      os: getOS(),
+      spider_type: getSpider(),
+      lon: "", // TODO
+      lat: "", // TODO
+      location_city: "", //TODO
+      level1_page: "", // TODO
+      level2_page: "", // TODO
+      custom_id: "", // TODO
+      webtype: getWebtype()
+    };
+    request(paramObj, params);
   }
   
-  function request() {
-    var url = getRequestUrl();
+  function eventTracking(params) {
+    var paramObj = {
+      'event':'',
+      'event_name':'',
+      'city':'',
+      'weixin_house_id':'',
+      'level1_page':'',
+      'level2_page':'',
+      'source':'',
+      'param1':'',
+      'param2':'',
+      'param3':'',
+      'param4':'',
+      'webtype':''
+    };
+    request(paramObj, params);
+  }
+  
+  function request(paramObj, params) {
+    var url = getRequestUrl(paramObj, params);
     var img = new Image();
     img.src = url;
     img.style.display = "none";
   }
   
-  function getRequestUrl(params) {
+  function getRequestUrl(paramObj, params) {
     var host = "http://tongji.leju.com/?site=gather&ctl=gather&act=general";
-    var serializedPramString = getSerializedPrams(params);
+    var serializedPramString = getSerializedPrams(paramObj, params);
     return host + serializedPramString;
   }
   
-  function getSerializedPrams(args) {
+  function getSerializedPrams(paramObj, args) {
     var result = "";
-    var paramObj = {
-      host: getHost(),
-      url: getPageUrl(),
-      screen_height: getScreenHeight(),
-      screen_width: getScreenWidth(),
-      brower: getBrowser().name,
-      user_agent: getUserAgent(),
-      city: "",
-      os: getOS(),
-      level1_page: "",
-      webtype: "",
-    };
     var serializedObject = mergeObject(paramObj, args);
     for (var prop in serializedObject) {
       var thisPramStr = prop + "=" + encodeURIComponent(serializedObject[prop]);
       result += "&" + thisPramStr;
     }
-    
     return result;
   }
   
@@ -158,6 +189,39 @@
     return uuid;
   }
   
+  function getSpider() {
+    var useragent=navigator.userAgent.toLowerCase();
+    if(useragent.indexOf('spider') > 0 || useragent.indexOf('bot') > 0) {
+      if(useragent.indexOf('baidu') > 0) {
+        return 'Baidu';
+      } else if(useragent.indexOf('sogou') > 0) {
+        return 'Sogou';
+      } else if(useragent.indexOf('google') > 0) {
+        return 'Google';
+      } else {
+        return 'other';
+      }
+    } else {
+      return '';
+    }
+  }
+  
+  function getWebtype(){
+    var url = document.location.href;
+    if(url.indexOf('/wap/') > 0 || url.indexOf('site=wap') > 0) {
+      return 'wap';
+    } if(url.indexOf('/weixin/') > 0 || url.indexOf('site=weixin') > 0) {
+      return 'weixin';
+    } if(url.indexOf('/pay/') > 0) {
+      return 'weixin';
+    } if(url.indexOf('/weibo/') > 0 || url.indexOf('site=weibo') > 0) {
+      return 'weibo';
+    } if(url.indexOf('shihui') > 0) {
+      return 'shihui';
+    }
+    return 'touch';
+  }
+  
   function getLongitude() {
   
   }
@@ -188,6 +252,20 @@
       args[name] = value;                    // Store as a property
     }
     return args;                               // Return the parsed arguments
+  }
+  
+  /**
+   * Get cookie value by a specific name.
+   * http://stackoverflow.com/a/15724300
+   */
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+    } else {
+      return null;
+    }
   }
   
 })(window, undefined);
