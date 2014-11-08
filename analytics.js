@@ -1,9 +1,31 @@
 (function(window, undefined){
 
-  window.analytics = {
-    pageTrack: pageTracking,
-    eventTrack: eventTracking
-  };
+  window.analytics = (function(){
+    initAll();
+    return {
+      pageTrack: pageTracking,
+      eventTrack: eventTracking
+    };
+  })();
+  
+  function initAll() {
+    addEventListener(window, "load", bindEventTrack);
+  }
+  
+  function bindEventTrack(event) {
+    var links = document.getElementsByTagName("a");
+    for (var i = 0, len = links.length; i < len; i++) {
+      (function(thisLink) {
+        addEventListener(thisLink, "click", function(event){
+          var gather = this.getAttribute("gather") || this.getAttribute("gather_new") || "";
+          var obj = eval("("+gather+")");
+          eventTracking(obj);
+          return false;
+        });
+      })(links[i]);
+    }
+    return false;
+  }
   
   // A String.trim() method for ECMAScript 3 
   if(!String.prototype.trim) {
@@ -52,7 +74,7 @@
       'param2':'',
       'param3':'',
       'param4':'',
-      'webtype':''
+      'webtype':getWebtype()
     };
     request(paramObj, params);
   }
@@ -286,6 +308,16 @@
       return parts.pop().split(";").shift();
     } else {
       return null;
+    }
+  }
+  
+  function addEventListener(dom, eventName, callback) {
+    if (window.jQuery || window.Zepto) {
+      $(dom).on(eventName, callback);
+    } else if (dom.addEventListener) {
+      dom.addEventListener(eventName, callback, false);
+    } else if (dom.attachEvent) {
+      dom.attachEvent("on" + eventName, callback);
     }
   }
   
