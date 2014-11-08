@@ -1,10 +1,15 @@
 (function(window, undefined){
 
   window.analytics = {
-    getOS: getOS
+    getOS: getOS,
+    getBrowser: getBrowser
   };
   
-  /* Get operating system name */
+  /**
+   * Get operating system name
+   *
+   * @return {String} [unknown | Android | iOS | WindowsPhone | BlackBerry | Symbian | Windows | MacOSX | Linux | Unix]
+   */
   function getOS() {
     var result = "unknown";
     var ua = navigator.userAgent;
@@ -17,7 +22,7 @@
       {regExp: /Win/, name: "Windows"},
       {regExp: /MacOS/, name: "MacOSX"},
       {regExp: /Linux/, name: "Linux"},
-      {regExp: /X11/, name: "Unix"},
+      {regExp: /X11/, name: "Unix"}
     ];
     
     for (var i = 0, len = regExpArr.length; i < len; i++) {
@@ -30,32 +35,40 @@
     return result;
   }
   
+  /**
+   * Get browser name.
+   * TODO
+   * @return {String} [unkown | Safari | Chrome | Android Browser | Opera | IE Mobile | IE | Firefox | UC]
+   */
   function getBrowser() {
-  
+    return "unknown";
   }
   
+  /** 
+   * TODO
+   */
   function getHost() {
-  
+    return window.location.host;
   }
   
   function getReferer() {
-  
+    return document.referrer;
   }
   
   function getUserAgent() {
-  
+    return window.navigator.userAgent;
   }
   
   function getScreenWidth() {
-  
+    return window.screen.width;
   }
   
   function getScreenHeight() {
-  
+    return window.screen.height;
   }
   
   function getPageUrl() {
-  
+    return window.location.href;
   }
   
   function getCity() {
@@ -66,8 +79,19 @@
   
   }
   
+  /**
+   * Create GUID / UUID
+   * http://stackoverflow.com/a/8809472
+   * @return {String} 
+   */
   function getUUID() {
-  
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+    });
+    return uuid;
   }
   
   function getLongitude() {
