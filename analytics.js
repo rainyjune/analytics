@@ -15,26 +15,26 @@
   function pageTracking(params) {
     var args = urlArgs();
     var paramObj = {
-      uid: "", // TODO
-      host: getHost(),
-      url: getPageUrl(),
-      referer_url: getReferer(),
-      screen_height: getScreenHeight(),
-      screen_width: getScreenWidth(),
-      brower: getBrowser().name,
-      browser: getBrowser().name, // We hope server side script can recognise this argument.
-      user_agent: getUserAgent(),
-      city: "", // TODO
-      source: args.source || "", 
-      os: getOS(),
-      spider_type: getSpider(),
-      lon: "", // TODO
-      lat: "", // TODO
-      location_city: "", //TODO
-      level1_page: "", // TODO
-      level2_page: "", // TODO
-      custom_id: "", // TODO
-      webtype: getWebtype()
+      "uid": getUid(),
+      "host": getHost(),
+      "url": getPageUrl(),
+      "referer_url": getReferer(),
+      "screen_height": getScreenHeight(),
+      "screen_width": getScreenWidth(),
+      "brower": getBrowser().name,
+      "browser": getBrowser().name, // We hope server side script can recognise this argument.
+      "user_agent": getUserAgent(),
+      "city": getCity(),
+      "source": args.source || "", 
+      "os": getOS(),
+      "spider_type": getSpider(),
+      "lon": getLongitude(),
+      "lat": getLatitude(),
+      "location_city": getLocationCity(),
+      "level1_page": getLevel1Page(),
+      "level2_page": getLevel2Page(),
+      "custom_id": getCustomId(),
+      "webtype": getWebtype()
     };
     request(paramObj, params);
   }
@@ -97,6 +97,9 @@
     }
   }
   
+  function getUid() {
+    return (typeof uid == "string") ? uid.trim() : "";
+  }
   /**
    * Get operating system name
    *
@@ -167,7 +170,23 @@
   }
   
   function getCity() {
+    return (typeof city == "string") ? city.trim() : "";
+  }
   
+  function getLocationCity() {
+    return (typeof location_city == "string") ? location_city.trim() : "";
+  }
+  
+  function getLevel1Page() {
+    return (typeof level1_page == "string") ? level1_page.trim() : "";
+  }
+  
+  function getLevel2Page() {
+    return (typeof level2_page == "string") ? level2_page.trim() : "";
+  }
+  
+  function getCustomId() {
+    return (typeof custom_id == "string") ? custom_id.trim() : "";
   }
   
   function getWebType() {
@@ -223,11 +242,17 @@
   }
   
   function getLongitude() {
-  
+    if (typeof lon == "undefined") {
+      return "";
+    }
+    return isNaN(lon) ? "" : lon;
   }
   
   function getLatitude() {
-    
+    if (typeof lat == "undefined") {
+      return "";
+    }
+    return isNaN(lat) ? "" : lat;
   }
   
   /*
