@@ -189,10 +189,6 @@
     return (typeof custom_id == "string") ? custom_id.trim() : "";
   }
   
-  function getWebType() {
-  
-  }
-  
   /**
    * Create GUID / UUID
    * http://stackoverflow.com/a/8809472
