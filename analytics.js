@@ -69,7 +69,7 @@
       'weixin_house_id':'',
       'level1_page':'',
       'level2_page':'',
-      'source':'',
+      'source': getCookie("source_name") || "",
       'param1':'',
       'param2':'',
       'param3':'',
