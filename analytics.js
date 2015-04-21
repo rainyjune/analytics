@@ -51,7 +51,9 @@
       "source": args.source || "", 
       "os": getOS(),
       "spider_type": getSpider(),
+      /* Deprecated */
       "lon": getLongitude(),
+      /* Deprecated */
       "lat": getLatitude(),
       "location_city": getLocationCity(),
       "level1_page": getLevel1Page(),
