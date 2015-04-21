@@ -59,7 +59,7 @@
       "level2_page": (typeof level2_page === "string") ? level2_page.trim() : "",
       "custom_id": (typeof custom_id === "string") ? custom_id.trim() : "",
       "webtype": getWebtype(),
-      "is_register": "" // TODO
+      "is_register": getCookie("mid") ? '1' : '0'
     };
     request(paramObj, params);
   }
