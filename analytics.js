@@ -47,7 +47,7 @@
       "screen_width": window.screen.width,
       "brower": getBrowser().name,
       "browser": getBrowser().name, // We hope server side script can recognise this argument.
-      "user_agent": getUserAgent(),
+      "user_agent": window.navigator.userAgent,
       "city": getCity(),
       "source": args.source || "", 
       "os": getOS(),
@@ -170,10 +170,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  function getUserAgent() {
-    return window.navigator.userAgent;
   }
   
   function getCity() {
