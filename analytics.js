@@ -54,7 +54,7 @@
       "spider_type": getSpider(),
       "lon": (typeof lon === "undefined" || isNaN(lon)) ? "" : lon,
       "lat": (typeof lat === "undefined" || isNaN(lat)) ? "" : lat,
-      "location_city": getLocationCity(),
+      "location_city": (typeof location_city == "string") ? location_city.trim() : "",
       "level1_page": getLevel1Page(),
       "level2_page": getLevel2Page(),
       "custom_id": getCustomId(),
@@ -165,10 +165,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  function getLocationCity() {
-    return (typeof location_city == "string") ? location_city.trim() : "";
   }
   
   function getLevel1Page() {
