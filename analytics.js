@@ -43,8 +43,8 @@
       "url": window.location.href,
       "referer_url": document.referrer,
       "referrer_url": document.referrer, // We hope server side script can recognise this argument.
-      "screen_height": getScreenHeight(),
-      "screen_width": getScreenWidth(),
+      "screen_height": window.screen.height,
+      "screen_width": window.screen.width,
       "brower": getBrowser().name,
       "browser": getBrowser().name, // We hope server side script can recognise this argument.
       "user_agent": getUserAgent(),
@@ -174,14 +174,6 @@
   
   function getUserAgent() {
     return window.navigator.userAgent;
-  }
-  
-  function getScreenWidth() {
-    return window.screen.width;
-  }
-  
-  function getScreenHeight() {
-    return window.screen.height;
   }
   
   function getCity() {
