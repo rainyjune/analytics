@@ -37,8 +37,8 @@
   function pageTracking(params) {
     var args = urlArgs();
     var paramObj = {
-      "uid": getUid(),
-      "uuid": getCookie("uuid") || "",
+      "uid": getUid(), // var uid
+      "uuid": getCookie("uuid") || "", 
       "host": getHost(),
       "url": getPageUrl(),
       "referer_url": getReferer(),
