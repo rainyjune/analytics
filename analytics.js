@@ -40,7 +40,7 @@
       "uid": getUid(), // var uid
       "uuid": getCookie("uuid") || "", 
       "host": document.domain,
-      "url": getPageUrl(),
+      "url": window.location.href,
       "referer_url": document.referrer,
       "referrer_url": document.referrer, // We hope server side script can recognise this argument.
       "screen_height": getScreenHeight(),
@@ -182,11 +182,6 @@
   
   function getScreenHeight() {
     return window.screen.height;
-  }
-  
-  // Get the current page URL.
-  function getPageUrl() {
-    return window.location.href;
   }
   
   function getCity() {
