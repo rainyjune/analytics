@@ -41,7 +41,8 @@
       "uuid": getCookie("uuid") || "", 
       "host": getHost(),
       "url": getPageUrl(),
-      "referer_url": getReferer(),
+      "referer_url": document.referrer,
+      "referrer_url": document.referrer, // We hope server side script can recognise this argument.
       "screen_height": getScreenHeight(),
       "screen_width": getScreenWidth(),
       "brower": getBrowser().name,
@@ -174,10 +175,6 @@
   // Get the domain portion of the origin of the current document.
   function getHost() {
     return document.domain;
-  }
-  
-  function getReferer() {
-    return document.referrer;
   }
   
   function getUserAgent() {
