@@ -122,7 +122,7 @@
   }
   
   function getUid() {
-    return (typeof uid == "string") ? uid.trim() : "";
+    return (typeof uid === "string") ? uid.trim() : "";
   }
   /**
    * Get operating system name
