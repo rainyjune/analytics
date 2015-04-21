@@ -39,7 +39,7 @@
     var paramObj = {
       "uid": getUid(), // var uid
       "uuid": getCookie("uuid") || "", 
-      "host": getHost(),
+      "host": document.domain,
       "url": getPageUrl(),
       "referer_url": document.referrer,
       "referrer_url": document.referrer, // We hope server side script can recognise this argument.
@@ -170,11 +170,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  // Get the domain portion of the origin of the current document.
-  function getHost() {
-    return document.domain;
   }
   
   function getUserAgent() {
