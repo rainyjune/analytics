@@ -192,6 +192,7 @@
     return window.screen.height;
   }
   
+  // Get the current page URL.
   function getPageUrl() {
     return window.location.href;
   }
