@@ -48,7 +48,7 @@
       "brower": getBrowser().name,
       "browser": getBrowser().name, // We hope server side script can recognise this argument.
       "user_agent": window.navigator.userAgent,
-      "city": getCity(),
+      "city": (typeof city == "string") ? city.trim() : "",
       "source": args.source || "", 
       "os": getOS(),
       "spider_type": getSpider(),
@@ -167,10 +167,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  function getCity() {
-    return (typeof city == "string") ? city.trim() : "";
   }
   
   function getLocationCity() {
