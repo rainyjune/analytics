@@ -189,21 +189,6 @@
     return (typeof custom_id == "string") ? custom_id.trim() : "";
   }
   
-  /**
-   * Create GUID / UUID
-   * http://stackoverflow.com/a/8809472
-   * @return {String} 
-   */
-  function getUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x7|0x8)).toString(16);
-    });
-    return uuid;
-  }
-  
   function getSpider() {
     var useragent=navigator.userAgent.toLowerCase();
     if(useragent.indexOf('spider') > 0 || useragent.indexOf('bot') > 0) {
