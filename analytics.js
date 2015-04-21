@@ -57,7 +57,7 @@
       "location_city": (typeof location_city === "string") ? location_city.trim() : "",
       "level1_page": (typeof level1_page === "string") ? level1_page.trim() : "",
       "level2_page": (typeof level2_page === "string") ? level2_page.trim() : "",
-      "custom_id": getCustomId(),
+      "custom_id": (typeof custom_id === "string") ? custom_id.trim() : "",
       "webtype": getWebtype(),
       "is_register": "" // TODO
     };
@@ -165,10 +165,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  function getCustomId() {
-    return (typeof custom_id == "string") ? custom_id.trim() : "";
   }
   
   function getSpider() {
