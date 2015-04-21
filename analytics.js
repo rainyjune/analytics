@@ -171,8 +171,9 @@
     return { name: match[1] || "", version: match[2] || "0" };
   }
   
+  // Get the domain portion of the origin of the current document.
   function getHost() {
-    return window.location.host;
+    return document.domain;
   }
   
   function getReferer() {
