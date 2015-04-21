@@ -52,10 +52,8 @@
       "source": args.source || "", 
       "os": getOS(),
       "spider_type": getSpider(),
-      /* Deprecated */
-      "lon": getLongitude(),
-      /* Deprecated */
-      "lat": getLatitude(),
+      "lon": (typeof lon === "undefined" || isNaN(lon)) ? "" : lon,
+      "lat": (typeof lat === "undefined" || isNaN(lat)) ? "" : lat,
       "location_city": getLocationCity(),
       "level1_page": getLevel1Page(),
       "level2_page": getLevel2Page(),
@@ -216,20 +214,6 @@
       return 'shihui';
     }
     return 'touch';
-  }
-  
-  function getLongitude() {
-    if (typeof lon == "undefined") {
-      return "";
-    }
-    return isNaN(lon) ? "" : lon;
-  }
-  
-  function getLatitude() {
-    if (typeof lat == "undefined") {
-      return "";
-    }
-    return isNaN(lat) ? "" : lat;
   }
   
   /*
