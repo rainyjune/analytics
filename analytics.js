@@ -37,7 +37,7 @@
   function pageTracking(params) {
     var args = urlArgs();
     var paramObj = {
-      "uid": getUid(), // var uid
+      "uid": (typeof uid === "string") ? uid.trim() : "",
       "uuid": getCookie("uuid") || "", 
       "host": document.domain,
       "url": window.location.href,
@@ -124,9 +124,6 @@
     }
   }
   
-  function getUid() {
-    return (typeof uid === "string") ? uid.trim() : "";
-  }
   /**
    * Get operating system name
    *
