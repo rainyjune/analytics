@@ -48,15 +48,15 @@
       "brower": getBrowser().name,
       "browser": getBrowser().name, // We hope server side script can recognise this argument.
       "user_agent": window.navigator.userAgent,
-      "city": (typeof city == "string") ? city.trim() : "",
+      "city": (typeof city === "string") ? city.trim() : "",
       "source": args.source || "", 
       "os": getOS(),
       "spider_type": getSpider(),
       "lon": (typeof lon === "undefined" || isNaN(lon)) ? "" : lon,
       "lat": (typeof lat === "undefined" || isNaN(lat)) ? "" : lat,
-      "location_city": (typeof location_city == "string") ? location_city.trim() : "",
-      "level1_page": getLevel1Page(),
-      "level2_page": getLevel2Page(),
+      "location_city": (typeof location_city === "string") ? location_city.trim() : "",
+      "level1_page": (typeof level1_page === "string") ? level1_page.trim() : "",
+      "level2_page": (typeof level2_page === "string") ? level2_page.trim() : "",
       "custom_id": getCustomId(),
       "webtype": getWebtype(),
       "is_register": "" // TODO
@@ -165,14 +165,6 @@
         !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
         [];
     return { name: match[1] || "", version: match[2] || "0" };
-  }
-  
-  function getLevel1Page() {
-    return (typeof level1_page == "string") ? level1_page.trim() : "";
-  }
-  
-  function getLevel2Page() {
-    return (typeof level2_page == "string") ? level2_page.trim() : "";
   }
   
   function getCustomId() {
