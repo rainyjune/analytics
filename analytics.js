@@ -38,6 +38,7 @@
     var args = urlArgs();
     var paramObj = {
       "uid": getUid(),
+      "uuid": getCookie("uuid") || "",
       "host": getHost(),
       "url": getPageUrl(),
       "referer_url": getReferer(),
