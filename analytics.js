@@ -57,7 +57,8 @@
       "level1_page": getLevel1Page(),
       "level2_page": getLevel2Page(),
       "custom_id": getCustomId(),
-      "webtype": getWebtype()
+      "webtype": getWebtype(),
+      "is_register": "" // TODO
     };
     request(paramObj, params);
   }
