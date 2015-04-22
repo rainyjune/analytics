@@ -18,18 +18,12 @@
       var thisElement = event.target,
           thisTag = thisElement.tagName.toLowerCase();
           gatherStr = thisElement.getAttribute("gather_new") || thisElement.getAttribute("gather") || "";
-      if (allowedTags.indexOf(thisTag) === -1 || gatherStr === "") {
-        return false;
-      }
+      if (allowedTags.indexOf(thisTag) === -1 || gatherStr === "") { return false; }
       var gatherParamObj = undefined;
       try{
-        var gatherParamObj = eval("(" + gatherStr + ")");
-      } catch(e) {
-        
-      }
-      if (typeof gatherParamObj !== "object") {
-        return ;
-      }
+        gatherParamObj = eval("(" + gatherStr + ")");
+      } catch(e) {}
+      if (typeof gatherParamObj !== "object") { return ;}
       eventTracking(gatherParamObj);
     });
     
