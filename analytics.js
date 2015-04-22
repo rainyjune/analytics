@@ -99,6 +99,7 @@
     var result = "";
     var serializedObject = mergeObject(paramObj, args);
     for (var prop in serializedObject) {
+      if (serializedObject[prop] === "") {continue;}
       var thisPramStr = prop + "=" + encodeURIComponent(serializedObject[prop]);
       result += "&" + thisPramStr;
     }
