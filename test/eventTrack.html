@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Page Tracking</title>
+    <style type="text/css">
+
+    </style>
+  </head>
+  <body>
+    <a href="#" class="dianhua" gather="{event:'chuping_esf_call',event_name:'触屏二手房拨打电话',city:'',level1_page:'index',level2_page:'',param1:'二手房经纪人',param2:'',param3:'',param4:'谢旭甲薇'}">Click</a>
+    <script src="../analytics.js"></script>
+    <script>
+    </script>
+    <script>
+      //analytics.pageTrack();
+      window.onload = function() {
+      
+        setTimeout(function() {
+          var new1 = document.createElement("a");
+          new1.href="#";
+          new1.setAttribute("gather" ,"{event:'footer_call',event_name:'页尾拨打电话',city:'北京',level1_page:'index',level2_page:'',param1:''}");
+          new1.innerHTML = "New 1";
+          document.body.appendChild(new1);
+          
+          var new2 = document.createElement("a");
+          new2.href="#";
+          new2.innerHTML = "New 2";
+          document.body.appendChild(new2);
+        }, 3000);
+        
+      };
+    </script>
+  </body>
+</html>
