@@ -142,20 +142,16 @@
   }
   
   function mergeObject(defaultObject, secondObject) {
-    if (window.jQuery || window.Zepto) {
-      return $.extend({}, defaultObject, secondObject);
-    } else {
-      var result = {};
-      for (var prop in defaultObject) {
-        result[prop] = defaultObject[prop];
-      }
-      for (var prop in secondObject) {
-        if (result.hasOwnProperty(prop)) {
-          result[prop] = secondObject[prop];
-        }
-      }
-      return result;
+    var result = {};
+    for (var prop in defaultObject) {
+      result[prop] = defaultObject[prop];
     }
+    for (var prop in secondObject) {
+      if (result.hasOwnProperty(prop)) {
+        result[prop] = secondObject[prop];
+      }
+    }
+    return result;
   }
   
   /**
