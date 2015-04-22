@@ -91,7 +91,7 @@
   function getRequestUrl(paramObj, params) {
     // TODO
     var actionName = (params && params.act) ? params.act : (params && params.event ? "event" : "general");
-    var host = "http://tongji.leju.com/?site=gather&ctl=gather&act=" + actionName;
+    var host = "//tongji.leju.com/?site=gather&ctl=gather&act=" + actionName;
     var serializedPramString = getSerializedPrams(paramObj, params);
     return host + serializedPramString;
   }
