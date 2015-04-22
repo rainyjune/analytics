@@ -125,18 +125,18 @@
   /**
    * Get operating system name
    *
-   * @return {String} [unknown | Android | iOS | WindowsPhone | BlackBerry | Symbian | Windows | MacOSX | Linux | Unix]
+   * @return {String} [other | Android | iOS | WPhone | BlackBerry | SymbianOS | windows | MacOSX | Linux | Unix]
    */
   function getOS() {
-    var result = "unknown";
+    var result = "other";
     var ua = navigator.userAgent;
     var regExpArr = [
       {regExp: /Android|Silk\//i, name: "Android"},
       {regExp: /iPhone|iPad|iPod/i, name: "iOS"},
-      {regExp: /IEMobile/i, name: "WindowsPhone"},
+      {regExp: /IEMobile/i, name: "WPhone"},
       {regExp: /BlackBerry|BB10|PlayBook/i, name: "BlackBerry"},
-      {regExp: /SymbianOS/i, name: "Symbian"},
-      {regExp: /Win/, name: "Windows"},
+      {regExp: /SymbianOS/i, name: "SymbianOS"},
+      {regExp: /Win/, name: "windows"},
       {regExp: /MacOS/, name: "MacOSX"},
       {regExp: /Linux/, name: "Linux"},
       {regExp: /X11/, name: "Unix"}
