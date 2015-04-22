@@ -291,9 +291,7 @@
   }
   
   function addEventListener(dom, eventName, callback) {
-    if (window.jQuery || window.Zepto) {
-      $(dom).on(eventName, callback);
-    } else if (dom.addEventListener) {
+    if (dom.addEventListener) {
       dom.addEventListener(eventName, callback, false);
     } else if (dom.attachEvent) {
       dom.attachEvent("on" + eventName, callback);
