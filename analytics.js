@@ -44,8 +44,8 @@
       "referrer_url": document.referrer, // We hope server side script can recognise this argument.
       "screen_height": window.screen.height,
       "screen_width": window.screen.width,
-      "brower": getBrowser().name,
-      "browser": getBrowser().name, // We hope server side script can recognise this argument.
+      "brower": getBrowser(),
+      "browser": getBrowser(), // We hope server side script can recognise this argument.
       "user_agent": window.navigator.userAgent,
       "city": (typeof city === "string") ? city.trim() : "",
       "source": args.source || "", 
