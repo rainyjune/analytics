@@ -157,32 +157,30 @@
    * @return {String} [other | baidu | UCWEB | qq | 360SE | sogou | Opera | Firefox | Chrome | android | Safari | IE]
    */
   function getBrowser() {
-    var s = navigator.userAgent.toLowerCase();
-    if (s.indexOf("baidubrowser") > 0 || s.indexOf("baiduboxapp") > 0) {
-      return "baidu";
-    } else if (s.indexOf('ucweb') > 0 || s.indexOf('ucbrowser') > 0) {
-      return 'UCWEB';
-    } else if (s.indexOf('mqqbrowser') > 0) {
-      return "qq";
-    } else if(s.indexOf('360se') > 0) {
-    	return '360SE';
-    } else if (s.indexOf('metasr') > 0) {
-      return 'sogou';
-    } else if (s.indexOf('opera') > 0 || s.indexOf('opr/') > 0) {
-      return 'Opera';
-    } else if(s.indexOf('firefox') > 0) {
-      return 'Firefox';
-    } else if(s.indexOf('chrome') > 0) {
-    	return 'Chrome';
-    } else if (s.indexOf('android') > 0 || s.indexOf('silk') > 0) {
-      return "android";
-    } else if(s.indexOf('safari') > 0) {
-      return 'Safari';
-    } else if(s.indexOf('msie') > 0 || s.indexOf('trident') > 0) {
-    	return 'IE';
-    } else {
-      return 'other';
+    var result = "other";
+    var ua = navigator.userAgent;
+    var regExpArr = [
+      {regExp: /baidubrowser|baiduboxapp/i, name: "baidu"},
+      {regExp: /UCWEB|UCBrowser/i, name: "UCWEB"},
+      {regExp: /MQQBrowser/i, name: "qq"},
+      {regExp: /360SE/i, name: "360SE"},
+      {regExp: /MetaSr/i, name: "sogou"},
+      {regExp: /Opera|OPR\//i, name: "Opera"},
+      {regExp: /Firefox/i, name: "Firefox"},
+      {regExp: /Chrome/i, name: "Chrome"},
+      {regExp: /Android|Silk\//i, name: "android"},
+      {regExp: /Safari/i, name: "Safari"},
+      {regExp: /MSIE|Trident/, name: "IE"},
+    ];
+    
+    for (var i = 0, len = regExpArr.length; i < len; i++) {
+      var thisPattern = regExpArr[i];
+      if (ua.match(thisPattern["regExp"])) {
+        result = thisPattern["name"];
+        break;
+      }
     }
+    return result;
   }
   
   function getSpider() {
