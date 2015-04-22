@@ -159,12 +159,31 @@
    */
   function getBrowser() {
     var s = navigator.userAgent.toLowerCase();
-    var match = /(webkit)[ \/]([\w.]+)/.exec(s) ||
-        /(opera)(?:.*version)?[ \/]([\w.]+)/.exec(s) ||
-        /(msie) ([\w.]+)/.exec(s) ||
-        !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
-        [];
-    return { name: match[1] || "", version: match[2] || "0" };
+    if (s.indexOf("baidubrowser") > 0 || s.indexOf("baiduboxapp") > 0) {
+      return "baidu";
+    } else if (s.indexOf('ucweb') > 0 || s.indexOf('ucbrowser') > 0) {
+      return 'UCWEB';
+    } else if (s.indexOf('mqqbrowser') > 0) {
+      return "qq";
+    } else if(s.indexOf('360se') > 0) {
+    	return '360SE';
+    } else if (s.indexOf('metasr') > 0) {
+      return 'sogou';
+    } else if (s.indexOf('opera') > 0 || s.indexOf('opr/') > 0) {
+      return 'Opera';
+    } else if(s.indexOf('firefox') > 0) {
+      return 'Firefox';
+    } else if(s.indexOf('chrome') > 0) {
+    	return 'Chrome';
+    } else if (s.indexOf('android') > 0 || s.indexOf('silk') > 0) {
+      return "android";
+    } else if(s.indexOf('safari') > 0) {
+      return 'Safari';
+    } else if(s.indexOf('msie') > 0 || s.indexOf('trident') > 0) {
+    	return 'IE';
+    } else {
+      return 'other';
+    }
   }
   
   function getSpider() {
