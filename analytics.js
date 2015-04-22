@@ -9,10 +9,13 @@
   })();
   
   function initAll() {
-    addEventListener(window, "load", bindEventTrack);
+    addEventListener(window, "load", function(){
+      pageTracking();
+      bindEventTrack();
+    });
   }
   
-  function bindEventTrack(event) {
+  function bindEventTrack() {
     var allowedTags = ["a", "button", "input"];
     addEventListener(document.body, "click", function(event){
       var thisElement = event.target,
