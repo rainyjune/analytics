@@ -154,8 +154,7 @@
   
   /**
    * Get browser name.
-   * TODO
-   * @return {String} [unkown | Safari | Chrome | Android Browser | Opera | IE Mobile | IE | Firefox | UC]
+   * @return {String} [other | baidu | UCWEB | qq | 360SE | sogou | Opera | Firefox | Chrome | android | Safari | IE]
    */
   function getBrowser() {
     var s = navigator.userAgent.toLowerCase();
