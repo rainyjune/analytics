@@ -32,19 +32,6 @@
       }
       eventTracking(gatherParamObj);
     });
-    /*
-    var links = document.getElementsByTagName("a");
-    for (var i = 0, len = links.length; i < len; i++) {
-      (function(thisLink) {
-        addEventListener(thisLink, "click", function(event){
-          var gather = this.getAttribute("gather") || this.getAttribute("gather_new") || "";
-          var obj = eval("("+gather+")");
-          eventTracking(obj);
-          return false;
-        });
-      })(links[i]);
-    }
-    */
     
     return false;
   }
