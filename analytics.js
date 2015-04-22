@@ -38,7 +38,6 @@
     var args = urlArgs();
     var paramObj = {
       "uid": (typeof uid === "string") ? uid.trim() : "",
-      "uuid": getCookie("uuid") || "", 
       "host": document.domain,
       "url": window.location.href,
       "referer_url": document.referrer,
@@ -59,7 +58,8 @@
       "level2_page": (typeof level2_page === "string") ? level2_page.trim() : "",
       "custom_id": (typeof custom_id === "string") ? custom_id.trim() : "",
       "webtype": getWebtype(),
-      "is_register": getCookie("mid") ? '1' : '0'
+      "is_register": getCookie("mid") ? '1' : '0',
+      "uuid": getCookie("uuid") || ""
     };
     request(paramObj, params);
   }
