@@ -1,5 +1,5 @@
 (function(window, undefined){
-
+  "use strict";
   window.analytics = (function(){
     initAll();
     return {
