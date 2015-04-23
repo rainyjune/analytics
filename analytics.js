@@ -34,7 +34,6 @@
   }
   
   function pageTracking(params) {
-    var args = urlArgs();
     var paramObj = {
       "uid": (typeof uid === "string") ? uid.trim() : "",
       "host": document.domain,
@@ -47,7 +46,7 @@
       "browser": getBrowser(), // We hope server side script can recognise this argument.
       "user_agent": window.navigator.userAgent,
       "city": (typeof city === "string") ? city.trim() : "",
-      "source": args.source || "", 
+      "source": urlArgs("source") || "", 
       "os": getOS(),
       "spider_type": getSpider(),
       "lon": (typeof lon === "undefined" || isNaN(lon)) ? "" : lon,
@@ -182,28 +181,10 @@
     return regExpQuery(regExpArr, url, "touch");
   }
   
-  /*
-   * This function parses ampersand-separated name=value argument pairs from
-   * the query string of the URL. It stores the name=value pairs in
-   * properties of an object and returns that object. Use it like this:
-   *
-   * var args = urlArgs();  // Parse args from URL
-   * var q = args.q || "";  // Use argument, if defined, or a default value
-   * var n = args.n ? parseInt(args.n) : 10;
-   */
-  function urlArgs() {
-    var args = {};                             // Start with an empty object
-    var query = location.search.substring(1);  // Get query string, minus '?'
-    var pairs = query.split("&");              // Split at ampersands
-    for(var i = 0; i < pairs.length; i++) {    // For each fragment
-      var pos = pairs[i].indexOf('=');       // Look for "name=value"
-      if (pos == -1) continue;               // If not found, skip it
-      var name = pairs[i].substring(0,pos);  // Extract the name
-      var value = pairs[i].substring(pos+1); // Extract the value
-      value = decodeURIComponent(value);     // Decode the value
-      args[name] = value;                    // Store as a property
-    }
-    return args;                               // Return the parsed arguments
+  function urlArgs(name) {
+    var regExp = new RegExp("(" + window.encodeURIComponent(name) + "=)([^&=]*)");
+    var matches = location.search.substring(1).match(regExp);
+    return matches ? window.decodeURIComponent(matches[2]) : null;
   }
   
   /**
