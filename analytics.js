@@ -253,11 +253,7 @@
   }
   
   function addEventListener(dom, eventName, callback) {
-    if (dom.addEventListener) {
-      dom.addEventListener(eventName, callback, false);
-    } else if (dom.attachEvent) {
-      dom.attachEvent("on" + eventName, callback);
-    }
+    dom.addEventListener(eventName, callback, false);
   }
   
 })(window, undefined);
