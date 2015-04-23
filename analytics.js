@@ -108,12 +108,9 @@
   }
   
   function mergeObject(defaultObject, secondObject) {
-    var result = {};
-    for (var prop in defaultObject) {
-      result[prop] = defaultObject[prop];
-    }
+    var result = Object.create(defaultObject);
     for (var prop in secondObject) {
-      if (result.hasOwnProperty(prop)) {
+      if (typeof result[prop] !== "undefined") {
         result[prop] = secondObject[prop];
       }
     }
