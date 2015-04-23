@@ -126,7 +126,6 @@
    * @return {String} [other | Android | iOS | WPhone | BlackBerry | SymbianOS | windows | MacOSX | Linux | Unix]
    */
   function getOS() {
-    var result = "other";
     var ua = navigator.userAgent;
     var regExpArr = [
       {regExp: /Android|Silk\//i, name: "Android"},
@@ -139,15 +138,7 @@
       {regExp: /Linux/, name: "Linux"},
       {regExp: /X11/, name: "Unix"}
     ];
-    
-    for (var i = 0, len = regExpArr.length; i < len; i++) {
-      var thisPattern = regExpArr[i];
-      if (ua.match(thisPattern["regExp"])) {
-        result = thisPattern["name"];
-        break;
-      }
-    }
-    return result;
+    return regExpQuery(regExpArr, ua, "other");
   }
   
   /**
@@ -155,7 +146,6 @@
    * @return {String} [other | baidu | UCWEB | qq | 360SE | sogou | Opera | Firefox | Chrome | android | Safari | IE]
    */
   function getBrowser() {
-    var result = "other";
     var ua = navigator.userAgent;
     var regExpArr = [
       {regExp: /baidubrowser|baiduboxapp/i, name: "baidu"},
@@ -170,32 +160,18 @@
       {regExp: /Safari/i, name: "Safari"},
       {regExp: /MSIE|Trident/, name: "IE"},
     ];
-    
-    for (var i = 0, len = regExpArr.length; i < len; i++) {
-      var thisPattern = regExpArr[i];
-      if (ua.match(thisPattern["regExp"])) {
-        result = thisPattern["name"];
-        break;
-      }
-    }
-    return result;
+    return regExpQuery(regExpArr, ua, "other");
   }
   
   function getSpider() {
-    var useragent=navigator.userAgent.toLowerCase();
-    if(useragent.indexOf('spider') > 0 || useragent.indexOf('bot') > 0) {
-      if(useragent.indexOf('baidu') > 0) {
-        return 'Baidu';
-      } else if(useragent.indexOf('sogou') > 0) {
-        return 'Sogou';
-      } else if(useragent.indexOf('google') > 0) {
-        return 'Google';
-      } else {
-        return 'other';
-      }
-    } else {
-      return '';
-    }
+    var ua=navigator.userAgent;
+    var regExpArr = [
+      {regExp: /Baiduspider/i, name: "Baidu"},
+      {regExp: /sogou.+spider/i, name: "Sogou"},
+      {regExp: /Googlebot/i, name: "Google"},
+      {regExp: /spider|bot/i, name: "other"}
+    ];
+    return regExpQuery(regExpArr, ua);
   }
   
   function getWebtype(){
@@ -250,6 +226,18 @@
     } else {
       return null;
     }
+  }
+  
+  function regExpQuery(regExpArr, str, defaultValue) {
+    var result = defaultValue || "";
+    for (var i = 0, len = regExpArr.length; i < len; i++) {
+      var thisPattern = regExpArr[i];
+      if (str.match(thisPattern["regExp"])) {
+        result = thisPattern["name"];
+        break;
+      }
+    }
+    return result;
   }
   
   function addEventListener(dom, eventName, callback) {
