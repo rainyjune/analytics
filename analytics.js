@@ -176,18 +176,13 @@
   
   function getWebtype(){
     var url = document.location.href;
-    if(url.indexOf('/wap/') > 0 || url.indexOf('site=wap') > 0) {
-      return 'wap';
-    } if(url.indexOf('/weixin/') > 0 || url.indexOf('site=weixin') > 0) {
-      return 'weixin';
-    } if(url.indexOf('/pay/') > 0) {
-      return 'weixin';
-    } if(url.indexOf('/weibo/') > 0 || url.indexOf('site=weibo') > 0) {
-      return 'weibo';
-    } if(url.indexOf('shihui') > 0) {
-      return 'shihui';
-    }
-    return 'touch';
+    var regExpArr = [
+      {regExp: /\/wap\/|site=wap/, name: "wap"},
+      {regExp: /\/weixin\/|site=weixin|\/pay\//, name: "weixin"},
+      {regExp: /\/weibo\/|site=weibo/, name: "weibo"},
+      {regExp: /shihui/, name: "shihui"}
+    ];
+    return regExpQuery(regExpArr, url, "touch");
   }
   
   /*
