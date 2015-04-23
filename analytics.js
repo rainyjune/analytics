@@ -9,15 +9,15 @@
   })();
   
   function initAll() {
-    addEventListener(window, "load", function(){
+    window.addEventListener("load", function(){
       pageTracking();
       bindEventTrack();
-    });
+    }, false);
   }
   
   function bindEventTrack() {
     var allowedTags = ["a", "button", "input"];
-    addEventListener(document.body, "click", function(event){
+    document.body.addEventListener("click", function(event){
       var thisElement = event.target,
           thisTag = thisElement.tagName.toLowerCase();
           gatherStr = thisElement.getAttribute("gather_new") || thisElement.getAttribute("gather") || "";
@@ -28,9 +28,7 @@
       } catch(e) {}
       if (typeof gatherParamObj !== "object") { return ;}
       eventTracking(gatherParamObj);
-    });
-    
-    return false;
+    }, false);
   }
   
   function pageTracking(params) {
@@ -211,10 +209,6 @@
       }
     }
     return result;
-  }
-  
-  function addEventListener(dom, eventName, callback) {
-    dom.addEventListener(eventName, callback, false);
   }
   
 })(window, undefined);
